@@ -1,54 +1,54 @@
 # Build_a_Full_Web_Application
-Capstone Web Development Project: A fully responsive recipe application demonstrating DOM manipulation, performance optimization, and cross-browser compatibility.
+A modern, dark-themed developer portfolio built with Vanilla JavaScript and CSS Grid. Features dynamic project rendering, glassmorphism UI effects, and a fully responsive mobile-first layout.
 
-# 🥘 Crave Pro | Advanced Recipe App (Capstone Project)
+# ⚡ DevCore | Modern Developer Portfolio
 
 ## 📖 Project Overview
-**Crave Pro** is a fully responsive, single-page web application designed as a comprehensive Capstone Project. It integrates advanced HTML5, CSS3, and JavaScript (ES6+) concepts to create a seamless recipe discovery experience. 
+**DevCore** is a sleek, high-performance portfolio template designed for developers. Built with a "mobile-first" approach, it features a modern **Dark UI** aesthetic with Emerald Green accents.
 
-This project focuses on **Performance Optimization**, **Cross-Browser Compatibility**, and **Dynamic State Management**.
+Unlike static HTML templates, this project utilizes **Vanilla JavaScript** to dynamically render project data, making it easy to add or remove portfolio items by simply modifying a JSON-like array.
 
 ---
 
-## 🚀 Key Features
+## 🎨 Key Features
 
-### 🎨 UI/UX & Theming
-* **Dark/Light Mode Toggle:** Implemented using CSS Variables (`:root`) and JS state management for a personalized viewing experience.
-* **Glassmorphism Design:** Modern UI with backdrop filters, gradients, and semi-transparent cards.
-* **Responsive Grid Layout:** A flexible grid system that adapts perfectly to mobile, tablet, and desktop screens.
+### 💎 Modern UI/UX
+* **Glassmorphism Navigation:** Sticky header with a backdrop-blur effect.
+* **Dark Mode Design:** A sophisticated color palette using CSS Variables (`--dark-bg`, `--primary`) for easy theming.
+* **Interactive Hover Effects:** Project cards transition from grayscale to full color on hover.
 
-### ⚡ Performance Optimization
-* **Lazy Loading:** Utilizes the `IntersectionObserver` API to load images only when they scroll into view, significantly reducing initial load time and HTTP requests.
-* **Efficient DOM Manipulation:** streamlined rendering logic to update the UI without refreshing the page.
-
-### 🧠 Core Functionality
-* **Advanced Filtering:** Filter recipes by categories (Breakfast, Dinner, etc.) instantly.
-* **Live Search:** Real-time search functionality to find recipes by name.
-* **Favorites System:** Persists user data using **LocalStorage**, allowing users to save their favorite recipes even after closing the browser.
-* **Interactive Modals:** Detailed recipe views with ingredients and instructions displayed in a custom-built popup overlay.
+### ⚙️ Technical Implementation
+* **Dynamic Content Rendering:** Project cards are injected into the DOM using JavaScript ES6 `map()` and template literals, keeping the HTML clean.
+* **CSS Grid & Flexbox:** Fully responsive layout that adapts to mobile, tablet, and desktop screens.
+* **Smooth Scrolling:** Native CSS smooth scrolling for navigation links.
 
 ---
 
 ## 🛠️ Tech Stack
-* **Frontend:** HTML5, CSS3 (Flexbox, Grid, Variables, Animations).
-* **Scripting:** Vanilla JavaScript (ES6+, LocalStorage API, Intersection Observer).
-* **Assets:** Unsplash Source API for dynamic high-quality food imagery.
+* **Structure:** HTML5 (Semantic)
+* **Styling:** CSS3 (Variables, Grid, Flexbox, Media Queries)
+* **Logic:** Vanilla JavaScript (ES6+)
+* **Fonts:** Inter (via Google Fonts)
 
 ---
 
-## 🎯 Objectives Achieved
-This project was built to meet the following "Final Project" criteria:
+## 🚀 How to Use / Customize
+1.  **Clone the Repo:**
+    ```bash
+    git clone [https://github.com/yourusername/devcore-portfolio.git](https://github.com/yourusername/devcore-portfolio.git)
+    ```
+2.  **Open:** Simply open `index.html` in your browser.
+3.  **Add Your Projects:**
+    Open the `<script>` tag at the bottom of `index.html` and modify the `projectData` array:
+    ```javascript
+    const projectData = [
+        {
+            title: "Your Project Name",
+            desc: "Short description...",
+            img: "image-url.jpg"
+        },
+        // Add more objects here
+    ];
+    ```
 
-1.  **Build a Full Web Application:** Integrated all skills into one complete app with dynamic features.
-2.  **Optimize for Performance:** Minimized resource usage via Lazy Loading and efficient CSS/JS structure.
-3.  **Cross-Browser Compatibility:** Tested and ensured functionality across Chrome, Firefox, and mobile browsers.
-
----
-
-## 💻 How to Run
-1.  Clone this repository.
-2.  Open `task 5.html` in your browser.
-3.  Enjoy browsing recipes!
-
----
-Created by Tejaswini.Beri
+Created with by Tejaswini. Beri
