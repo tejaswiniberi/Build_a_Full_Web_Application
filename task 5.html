@@ -3,390 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crave Pro | Advanced Recipe App</title>
+    <title>Modern Dev Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
-        /* --- 1. CSS VARIABLES (THEMING) --- */
         :root {
-            --bg-gradient: linear-gradient(to right, #24243e, #302b63, #0f0c29);
-            --card-bg: rgba(255, 255, 255, 0.1);
-            --text-main: #ffffff;
-            --text-sec: #b2bec3;
-            --primary: #ff0055;
-            --accent: #00d2ff;
-            --modal-bg: rgba(15, 12, 41, 0.95);
+            --primary: #10b981; /* Emerald */
+            --primary-hover: #059669;
+            --dark-bg: #0f172a;
+            --card-dark: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
         }
 
-        /* Light Mode Variables */
-        body.light-mode {
-            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            --card-bg: rgba(255, 255, 255, 0.8);
-            --text-main: #2d3436;
-            --text-sec: #636e72;
-            --primary: #d63031;
-            --accent: #0984e3;
-            --modal-bg: rgba(255, 255, 255, 0.95);
+        * {
+            box-sizing: border-box;
+            transition: all 0.3s ease;
         }
 
-        /* --- GLOBAL STYLES --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background: var(--bg-gradient);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: var(--dark-bg);
             color: var(--text-main);
-            min-height: 100vh;
-            transition: background 0.5s ease;
+            scroll-behavior: smooth;
+            line-height: 1.6;
         }
 
-        /* --- HEADER & TOGGLE --- */
-        header {
-            padding: 2rem 5%;
+        /* 1. Navigation */
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 1.5rem 10%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(to right, var(--primary), var(--accent));
+        .logo {
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        /* 2. Hero Section */
+        .hero {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at top right, #1e293b, #0f172a);
+            padding: 0 20px;
+        }
+
+        .hero h1 { 
+            font-size: clamp(2.5rem, 8vw, 4.5rem); 
+            margin-bottom: 1rem; 
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .theme-btn {
-            background: var(--card-bg);
-            border: 2px solid var(--accent);
-            color: var(--text-main);
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+        .hero p { color: var(--text-muted); font-size: 1.2rem; max-width: 600px; }
 
-        /* --- SEARCH & FILTER --- */
-        .controls {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding: 0 1rem;
-        }
-
-        input#search {
-            padding: 1rem 2rem;
-            width: 100%;
-            max-width: 500px;
-            border-radius: 50px;
-            border: none;
-            background: var(--card-bg);
-            color: var(--text-main);
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--text-sec);
-        }
-
-        .tabs button {
-            background: transparent;
-            border: none;
-            color: var(--text-sec);
-            margin: 0 10px;
-            font-size: 1rem;
-            cursor: pointer;
-            padding-bottom: 5px;
-        }
-        .tabs button.active {
-            color: var(--accent);
-            border-bottom: 2px solid var(--accent);
-        }
-
-        /* --- GRID --- */
-        .container { max-width: 1200px; margin: 0 auto; padding-bottom: 4rem;}
-        .grid {
+        /* 3. Project Grid */
+        .section-padding { padding: 6rem 10%; }
+        
+        .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
-            padding: 0 20px;
+            margin-top: 3rem;
         }
 
-        /* --- CARD DESIGN --- */
         .card {
-            background: var(--card-bg);
+            background: var(--card-dark);
             border-radius: 20px;
             overflow: hidden;
-            position: relative;
-            transition: transform 0.3s;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.05);
         }
-        .card:hover { transform: translateY(-5px); }
 
-        .img-box { height: 200px; background: #333; overflow: hidden; }
-        .card-img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s; }
-        .card-img.loaded { opacity: 1; }
+        .card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
 
-        .content { padding: 1.5rem; }
-        .tag { color: var(--accent); font-size: 0.8rem; text-transform: uppercase; font-weight: bold; }
-        
-        .actions {
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            filter: grayscale(20%);
+        }
+
+        .card:hover img { filter: grayscale(0%); }
+
+        .card-content { padding: 1.8rem; }
+        .card-content h3 { margin-top: 0; color: #fff; font-size: 1.4rem; }
+        .card-content p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* 4. Contact Form */
+        .contact-section {
+            background: #0a0f1d;
+            border-radius: 40px 40px 0 0;
+        }
+
+        form {
+            max-width: 550px;
+            margin: 0 auto;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1rem;
+            flex-direction: column;
+            gap: 1rem;
         }
 
-        /* View Recipe Button */
-        .btn-view {
-            background: var(--primary);
-            border: none;
+        input, textarea {
+            padding: 1rem;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: transform 0.2s;
+            font-family: inherit;
         }
-        .btn-view:hover { transform: scale(1.05); }
 
-        /* Heart Animation */
-        .heart-btn {
-            background: none;
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+        }
+
+        button {
+            background: var(--primary);
+            color: #0f172a;
+            padding: 1rem;
             border: none;
-            font-size: 1.5rem;
+            border-radius: 8px;
             cursor: pointer;
-            color: var(--text-sec);
-            transition: color 0.3s, transform 0.2s;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-top: 10px;
         }
-        .heart-btn.loved { color: var(--primary); transform: scale(1.2); }
 
-        /* --- MODAL (POPUP) --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-            z-index: 1000;
+        button:hover { 
+            background: var(--primary-hover);
+            transform: scale(1.02);
         }
-        .modal-overlay.open { opacity: 1; pointer-events: all; }
 
-        .modal-content {
-            background: var(--modal-bg);
-            padding: 2rem;
-            border-radius: 20px;
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            color: var(--text-main);
-            border: 1px solid var(--accent);
+        /* Mobile Viewports */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .section-padding { padding: 4rem 5%; }
         }
-        .close-modal {
-            position: absolute;
-            top: 15px; right: 20px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-sec);
-        }
-        .modal-list li { margin-bottom: 5px; color: var(--text-sec); }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>CRAVE.</h1>
-        <button class="theme-btn" onclick="toggleTheme()">🌗 Mode</button>
+    <nav>
+        <div class="logo"><strong>Dev</strong><span>Core</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#projects">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header id="home" class="hero">
+        <h1>Code. Create.<span> Elevate.</span></h1>
+        <p>Full-stack developer specializing in building scalable, aesthetic digital solutions for the next generation of the web.</p>
     </header>
 
-    <div class="container">
-        <div class="controls">
-            <input type="text" id="searchInput" placeholder="Search recipes (e.g. Sushi, Burger)...">
-            <div class="tabs">
-                <button class="active" onclick="filterData('all', this)">All</button>
-                <button onclick="filterData('favorites', this)">❤️ Favorites</button>
-                <button onclick="filterData('Breakfast', this)">Breakfast</button>
-                <button onclick="filterData('Dinner', this)">Dinner</button>
+    <section id="projects" class="section-padding">
+        <h2 style="font-size: 2.2rem;">Selected Projects</h2>
+        <div class="project-grid" id="project-container">
             </div>
-        </div>
+    </section>
 
-        <div class="grid" id="grid"></div>
-    </div>
-
-    <div class="modal-overlay" id="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2 id="m-title" style="margin-bottom:10px;">Title</h2>
-            <p id="m-desc" style="color:var(--accent); margin-bottom:15px;">Description</p>
-            
-            <h3 style="font-size:1.1rem; margin-bottom:5px;">🥕 Ingredients:</h3>
-            <ul id="m-ingredients" class="modal-list" style="margin-bottom:15px; padding-left:20px;"></ul>
-            
-            <h3 style="font-size:1.1rem; margin-bottom:5px;">🔥 Instructions:</h3>
-            <p id="m-steps" style="color:var(--text-sec); font-size:0.9rem; line-height:1.4;"></p>
-        </div>
-    </div>
+    <section id="contact" class="section-padding contact-section">
+        <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 3rem;">Ready to start a project?</h2>
+        <form id="portfolio-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Email Address" required>
+            <textarea rows="5" placeholder="Project details..."></textarea>
+            <button type="submit">Send Inquiry</button>
+        </form>
+    </section>
 
     <script>
-        // --- 1. ENHANCED DATA SET (Updated with Real Images) ---
-        const recipes = [
-            { 
-                id: 1, title: "Neon Sushi Roll", category: "Dinner", cal: "320", 
-                img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=600&q=80",
-                ingredients: ["Sushi Rice", "Fresh Salmon", "Avocado", "Nori Sheets"],
-                steps: "Cook rice with vinegar. Lay nori on mat. Spread rice, add fish and avocado. Roll tightly and slice."
+        const projectData = [
+            {
+                title: "Crypto Nexus",
+                desc: "A real-time cryptocurrency tracking engine with Web3 wallet integration.",
+                img: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=800&q=80"
             },
-            { 
-                id: 2, title: "Sunrise Smoothie", category: "Breakfast", cal: "210", 
-                img: "https://images.unsplash.com/photo-1511690656952-34342d5c71df?auto=format&fit=crop&w=600&q=80",
-                ingredients: ["Frozen Berries", "Banana", "Almond Milk", "Chia Seeds"],
-                steps: "Blend all fruits and milk until smooth. Top with chia seeds and serve in a bowl."
+            {
+                title: "AI Content Studio",
+                desc: "Cloud-based SaaS platform using OpenAI to generate marketing copy on the fly.",
+                img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80"
             },
-            { 
-                id: 3, title: "Midnight Burger", category: "Dinner", cal: "600", 
-                img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
-                ingredients: ["Angus Beef Patty", "Brioche Bun", "Cheddar Cheese", "BBQ Sauce"],
-                steps: "Grill patty to preference. Toast buns. Assemble with cheese, lettuce, and sauce."
-            },
-            { 
-                id: 4, title: "Galaxy Donuts", category: "Breakfast", cal: "450", 
-                img: "https://images.unsplash.com/photo-1551024601-562963525638?auto=format&fit=crop&w=600&q=80",
-                ingredients: ["Flour", "Sugar", "Food Coloring", "Glaze"],
-                steps: "Mix dough and fry donuts. Divide glaze into bowls and dye them. Dip donuts to create galaxy effect."
-            },
-            { 
-                id: 5, title: "Spicy Basil Pasta", category: "Dinner", cal: "520", 
-                img: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=600&q=80",
-                ingredients: ["Pasta", "Fresh Basil", "Garlic", "Chili Flakes"],
-                steps: "Boil pasta. Sauté garlic and chili in olive oil. Toss pasta with oil and fresh basil."
-            },
-            { 
-                id: 6, title: "Fluffy Berry Cakes", category: "Breakfast", cal: "380", 
-                img: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=600&q=80",
-                ingredients: ["Pancake Mix", "Blueberries", "Maple Syrup", "Butter"],
-                steps: "Mix batter with berries. Cook on skillet until golden. Serve with syrup and butter."
+            {
+                title: "Zenith Architecture",
+                desc: "A minimalist 3D showcase for high-end boutique architectural firms.",
+                img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"
             }
         ];
 
-        // --- 2. STATE MANAGEMENT ---
-        let favorites = JSON.parse(localStorage.getItem('craveFavs')) || [];
-        const grid = document.getElementById('grid');
-
-        // --- 3. CORE FUNCTIONS ---
-
-        function render(data) {
-            grid.innerHTML = '';
-            
-            if(data.length === 0) {
-                grid.innerHTML = `<p style="text-align:center; grid-column:1/-1; color:var(--text-sec);">No recipes found.</p>`;
-                return;
-            }
-
-            data.forEach(item => {
-                const isFav = favorites.includes(item.id);
-                const heartClass = isFav ? 'loved' : '';
-
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <div class="img-box">
-                        <img data-src="${item.img}" class="card-img lazy" alt="${item.title}">
+        const container = document.getElementById('project-container');
+        
+        function renderProjects() {
+            container.innerHTML = projectData.map(p => `
+                <article class="card">
+                    <img src="${p.img}" alt="${p.title}" loading="lazy">
+                    <div class="card-content">
+                        <h3>${p.title}</h3>
+                        <p>${p.desc}</p>
                     </div>
-                    <div class="content">
-                        <span class="tag">${item.category} • ${item.cal} kcal</span>
-                        <h3>${item.title}</h3>
-                        <div class="actions">
-                            <button class="btn-view" onclick="openModal(${item.id})">View Recipe</button>
-                            <button class="heart-btn ${heartClass}" onclick="toggleFav(${item.id}, event)">❤</button>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-            initLazyLoad();
+                </article>
+            `).join('');
         }
 
-        // --- 4. NEW FEATURE: FAVORITES SYSTEM ---
-        function toggleFav(id, event) {
-            if (favorites.includes(id)) {
-                favorites = favorites.filter(favId => favId !== id); // Remove
-            } else {
-                favorites.push(id); // Add
-            }
-            // Save to browser storage
-            localStorage.setItem('craveFavs', JSON.stringify(favorites));
-            
-            // Toggle visual class immediately
-            const btn = event.target; 
-            btn.classList.toggle('loved');
-        }
-
-        // --- 5. NEW FEATURE: MODAL DETAILS ---
-        const modal = document.getElementById('modal');
-
-        function openModal(id) {
-            const recipe = recipes.find(r => r.id === id);
-            
-            document.getElementById('m-title').innerText = recipe.title;
-            document.getElementById('m-desc').innerText = `${recipe.category} | ${recipe.cal} Calories`;
-            document.getElementById('m-steps').innerText = recipe.steps;
-            
-            const list = document.getElementById('m-ingredients');
-            list.innerHTML = recipe.ingredients.map(i => `<li>${i}</li>`).join('');
-            
-            modal.classList.add('open');
-        }
-
-        function closeModal() {
-            modal.classList.remove('open');
-        }
-
-        // --- 6. NEW FEATURE: THEME TOGGLE ---
-        function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-        }
-
-        // --- FILTERING LOGIC ---
-        function filterData(type, btnElement) {
-            // Update active tab style
-            document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
-            btnElement.classList.add('active');
-
-            let filtered = [];
-            if (type === 'all') {
-                filtered = recipes;
-            } else if (type === 'favorites') {
-                filtered = recipes.filter(r => favorites.includes(r.id));
-            } else {
-                filtered = recipes.filter(r => r.category === type);
-            }
-            render(filtered);
-        }
-
-        // Search Listener
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const val = e.target.value.toLowerCase();
-            const searchResults = recipes.filter(r => r.title.toLowerCase().includes(val));
-            render(searchResults);
+        document.getElementById('portfolio-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Inquiry Received! I will get back to you within 24 hours.');
+            e.target.reset();
         });
 
-        // --- LAZY LOADING OPTIMIZATION ---
-        function initLazyLoad() {
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if(entry.isIntersecting) {
-                        entry.target.src = entry.target.dataset.src;
-                        entry.target.onload = () => entry.target.classList.add('loaded');
-                        obs.unobserve(entry.target);
-                    }
-                });
-            });
-            document.querySelectorAll('.lazy').forEach(img => observer.observe(img));
-        }
-
-        // Init
-        render(recipes);
-
+        renderProjects();
     </script>
 </body>
 </html>
